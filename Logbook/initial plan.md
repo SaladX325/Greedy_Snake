@@ -5,15 +5,16 @@ classes:
   1. Snake Head
   2. Snake Body
   3. Map
+
 Functions: 
-  1. Initial Function
-  2. Run Function
-    1. Random Rice/ Food
-    2. Controlling Function
-    3. Growing Function
-    4. Scoring Function 
-    5. Presenetation Function
-  3. GameOver Function
+  >1. Initial Function
+  >2. Run Function
+    >>1. Random Rice/ Food
+    >>2. Controlling Function
+    >>3. Growing Function
+    >>4. Scoring Function 
+    >>5. Presenetation Function
+  >3. GameOver Function
 
 ---
 In the Snake Head Class, following variable are contained:
