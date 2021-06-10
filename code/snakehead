@@ -1,0 +1,39 @@
+#pragma once
+/***
+* Direction:
+*		0
+*		|
+*		|
+* 3----head----1
+*		|
+*		|
+*		2
+***/
+class snakehead
+{
+private:
+	int direction, x, y;
+public:
+	snakehead(int d = 0, int xx = 0, int yy = 0) : direction(d), x(xx), y(yy) {}
+	int xval() const { return	x; }
+	int yval() const { return	y; }
+	void xwrite(int a) { x = a; }
+	void ywrite(int a) { y = a; }
+	void move() { 
+		switch (direction) {
+		case 0:
+			y--;
+		case 2:
+			y++;
+		case 1:
+			x++;
+		case 3:
+			x--;
+		}
+	}
+	void dwrite(int a) { direction = a; }
+	
+
+
+};
+
