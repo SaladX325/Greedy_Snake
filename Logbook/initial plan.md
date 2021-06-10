@@ -9,11 +9,11 @@ classes:
 Functions: 
   >1. Initial Function
   >2. Run Function
-    >>1. Random Rice/ Food
-    >>2. Controlling Function
-    >>3. Growing Function
-    >>4. Scoring Function 
-    >>5. Presenetation Function
+  >>1. Random Rice/ Food
+  >>2. Controlling Function
+  >>3. Growing Function
+  >>4. Scoring Function 
+  >>5. Presenetation Function
   >3. GameOver Function
 
 ---
