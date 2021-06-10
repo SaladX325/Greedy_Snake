@@ -20,6 +20,7 @@ In the Snake Head Class, following variable are contained:
   1. x value
   2. y value
   3. directin of current move
+
 And following functions are contained:
   1. initialization function
   2. moving function
