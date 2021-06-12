@@ -1,0 +1,91 @@
+#pragma once
+#include <vector>
+#include "snakehead.h"
+using namespace std;
+
+/***
+* Direction:
+*		0
+*		|
+*		|
+* 3----head----1
+*		|
+*		|
+*		2
+***/
+
+
+typedef struct Body{
+	int x, y;
+	Body* next = NULL;
+	Body* pre = NULL;
+}Body, *s;
+class snakebody
+{
+private:
+
+	Body* head = new Body;
+	Body* last = new Body;
+	Body* s_end = new Body;
+public:
+	snakebody() {}
+	void initialize(snakehead a) {
+		head->x = a.xval();
+		head->y = a.yval();
+		switch (a.dir()) {
+		case 0:
+			last->x = a.xval() + 1;
+			last->y = a.yval();
+			s_end->x = a.xval() + 2;
+			s_end->y = a.yval();
+		case 1:
+			last->x = a.xval();
+			last->y = a.yval() - 1;
+			s_end->x = a.xval();
+			s_end->y = a.yval() - 2;
+		case 2:
+			last->x = a.xval() - 1;
+			last->y = a.yval();
+			s_end->x = a.xval() - 2;
+			s_end->y = a.yval();
+		case 3:
+			last->x = a.xval();
+			last->y = a.yval() + 1;
+			s_end->x = a.xval();
+			s_end->y = a.yval() + 2;
+		}
+		head->next = last;
+		last->pre = head;
+		last->next = s_end;
+		s_end->pre = last;
+	}
+	void move(snakehead a) {
+		Body* p = new Body;
+		p = head;
+		head->next->pre = p;
+		head->x = a.xval();
+		head->y = a.yval();
+		head->next = p;
+		s_end = s_end->pre;
+		free(s_end->next);
+		s_end->next = NULL;
+	}
+	void grow(snakehead a) {
+		Body* p = new Body;
+		p = head;
+		head->next->pre = p;
+		head->x = a.xval();
+		head->y = a.yval();
+		head->next = p;
+		p->pre = head;
+	}
+	void print() {
+		Body* p = new Body;
+		p = head;
+		while (!p) {
+			cout << p->x << "\t" << p->y << endl;
+			p = p->next;
+		}
+	}
+};
+
