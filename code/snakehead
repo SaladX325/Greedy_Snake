@@ -17,6 +17,7 @@ public:
 	snakehead(int d = 0, int xx = 0, int yy = 0) : direction(d), x(xx), y(yy) {}
 	int xval() const { return	x; }
 	int yval() const { return	y; }
+	int dir() const { return	direction; }
 	void xwrite(int a) { x = a; }
 	void ywrite(int a) { y = a; }
 	void move() { 
