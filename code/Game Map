@@ -1,0 +1,33 @@
+#pragma once
+#include <iostream>
+using namespace std;
+class Gamemap
+{
+	enum {
+		x = 30, y = 30 //x is rows, y is columns
+	};
+private:
+	char gamearray[x][y];
+public:
+	Gamemap() : gamearray() {}
+	void initialize() {
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < y; j++) {
+				if ((i == 0 || i == x - 1) && (j == 0 || j == y - 1)) gamearray[i][j] = '+';
+				else if (i == 0 || i == x - 1) gamearray[i][j] = '-';
+				else if (j == 0 || j == y - 1) gamearray[i][j] = '|';
+				else gamearray[i][j] = ' ';
+
+			}
+		}
+	}
+	void print() {
+		for (int i = 0; i < x; i++) {
+			for (int j = 0; j < y; j++) {
+				cout << gamearray[i][j];
+			}
+			cout << endl;
+		}
+	}
+};
+
