@@ -4,12 +4,12 @@ using namespace std;
 class Gamemap
 {
 	enum {
-		x = 30, y = 30 //x is rows, y is columns
+		x = 30, y = 100 //x is rows, y is columns
 	};
-private:
-	char gamearray[x][y];
 public:
+	char gamearray[x][y];
 	Gamemap() : gamearray() {}
+
 	void initialize() {
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
