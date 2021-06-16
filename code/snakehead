@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+using namespace std;
 /***
 * Direction:
 *		0
@@ -23,17 +25,23 @@ public:
 	void move() { 
 		switch (direction) {
 		case 0:
-			y--;
-		case 2:
-			y++;
-		case 1:
-			x++;
-		case 3:
 			x--;
+			break;
+		case 2:
+			x++;
+			break;
+		case 1:
+			y++;
+			break;
+		case 3:
+			y--;
+			break;
 		}
 	}
 	void dwrite(int a) { direction = a; }
-	
+	void print() {
+		cout << "Head: \n" << x << "\t" << y << endl;
+	}
 
 
 };
