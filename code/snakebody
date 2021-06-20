@@ -1,16 +1,22 @@
 #pragma once
 #include "snakehead.h"
+#include <vector>
+#define up 72
+#define down 80
+#define right 77
+#define left 75
 using namespace std;
+
 
 /***
 * Direction:
-*		0
+*		72
 *		|
 *		|
-* 3----head----1
+* 75----head----77
 *		|
 *		|
-*		2
+*		80
 ***/
 
 
@@ -32,30 +38,28 @@ public:
 	void initialize(snakehead shead) {
 		head->x = shead.xval();
 		head->y = shead.yval();
-		cout << "shead.dir() = " << shead.dir() << endl;
-
 		switch (shead.dir()) {
-		case 0:
+		case up:
 			last->x = shead.xval() + 1;
 			last->y = shead.yval();
 			s_end->x = shead.xval() + 2;
 			s_end->y = shead.yval();
 			break;
-		case 1:
+		case right:
 			last->x = shead.xval();
 			last->y = shead.yval() - 1;
 			s_end->x = shead.xval();
 			s_end->y = shead.yval() - 2;
 			break;
 
-		case 2:
+		case down:
 			last->x = shead.xval() - 1;
 			last->y = shead.yval();
 			s_end->x = shead.xval() - 2;
 			s_end->y = shead.yval();
 			break;
 
-		case 3:
+		case left:
 			last->x = shead.xval();
 			last->y = shead.yval() + 1;
 			s_end->x = shead.xval();
@@ -111,6 +115,17 @@ public:
 			cout << p->x << "\t" << p->y << endl;
 			p = p->next;
 		}
+	}
+
+	vector<pair<int, int>> output() {
+		vector<pair<int, int>> x;
+		Body* p = new Body;
+		p = head->next;
+		while (p) {
+			x.push_back({ p->x, p->y });
+			p = p->next;
+		}
+		return x;
 	}
 };
 
