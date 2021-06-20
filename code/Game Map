@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <vector>
 using namespace std;
 class Gamemap
 {
@@ -7,25 +8,35 @@ class Gamemap
 		x = 30, y = 100 //x is rows, y is columns
 	};
 public:
-	char gamearray[x][y];
-	Gamemap() : gamearray() {}
-
-	void initialize() {
+	vector<string> gamearray;
+	vector<string> basemap;
+	Gamemap() : gamearray(), basemap() {
+		string tempstr = "";
 		for (int i = 0; i < x; i++) {
 			for (int j = 0; j < y; j++) {
-				if ((i == 0 || i == x - 1) && (j == 0 || j == y - 1)) gamearray[i][j] = '+';
-				else if (i == 0 || i == x - 1) gamearray[i][j] = '-';
-				else if (j == 0 || j == y - 1) gamearray[i][j] = '|';
-				else gamearray[i][j] = ' ';
+				if ((i == 0 || i == x - 1) && (j == 0 || j == y - 1)) {
+					tempstr += '+';
+				}
+				else if (i == 0 || i == x - 1) {
+					tempstr += '-';
+				}
+				else if (j == 0 || j == y - 1) {
+					tempstr += '|';
+				}
+				else {
+					tempstr += ' ';
+				}
 
 			}
+			gamearray.push_back(tempstr);
+			basemap.push_back(tempstr);
+			tempstr = "";
 		}
 	}
+
 	void print() {
 		for (int i = 0; i < x; i++) {
-			for (int j = 0; j < y; j++) {
-				cout << gamearray[i][j];
-			}
+			cout << gamearray[i];
 			cout << endl;
 		}
 	}
