@@ -1,16 +1,12 @@
 #pragma once
 #include <stdlib.h>
 #include <time.h>
+#include <iostream>
+using namespace std;
 class food
 {
 public:
 	int x, y;
-  food(): x(0), y(0) {}
-	void generate(int a, int b) {
-		srand(time(0));
-		x = rand() % a;
-		y = rand() % b;
-	}
-	int fx() { return x; }
-	int fy() { return y; }
+	food(): x(0), y(0) {}
 };
+
