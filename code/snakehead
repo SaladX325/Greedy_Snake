@@ -1,15 +1,21 @@
 #pragma once
 #include <iostream>
+#define up 72
+#define down 80
+#define right 77
+#define left 75
+
 using namespace std;
+
 /***
 * Direction:
-*		0
+*		72
 *		|
 *		|
-* 3----head----1
+* 75----head----77
 *		|
 *		|
-*		2
+*		80
 ***/
 class snakehead
 {
@@ -24,16 +30,16 @@ public:
 	void ywrite(int a) { y = a; }
 	void move() { 
 		switch (direction) {
-		case 0:
+		case up:
 			x--;
 			break;
-		case 2:
+		case down:
 			x++;
 			break;
-		case 1:
+		case right:
 			y++;
 			break;
-		case 3:
+		case 75:
 			y--;
 			break;
 		}
