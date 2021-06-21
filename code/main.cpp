@@ -45,7 +45,7 @@ int input(int time, int dir) {
 }
 
 void ctrl(snakehead* shead, int level) {
-	int time = 1200 / level;
+	int time = 1000 / level;
 	int key = input(time, shead->dir());
 	if (key) {
 		shead->dwrite(key);
@@ -133,7 +133,6 @@ void move(snakehead* shead, snakebody* sbody) {
 void grow_and_move(snakehead* shead, snakebody* sbody) {
 	shead->move();
 	sbody->grow(*shead);
-	//sbody->move(*shead);
 }
 
 void run(snakehead* shead, snakebody* sbody, Gamemap* gm, food f, int* score, int* level) {
@@ -146,7 +145,8 @@ void run(snakehead* shead, snakebody* sbody, Gamemap* gm, food f, int* score, in
 		check(gm, *shead, *sbody, f, step, &is_grow, &is_over);
 		system("cls");
 		gm->print();
-		cout << "Score: " << *score << endl;
+		cout << "Score: " << *score;
+		cout << "\tLevel: " << *level << endl;
 		if (is_over) { gameover(*score); break; }
 		if (is_grow) {
 			grow_and_move(shead, sbody);
@@ -161,6 +161,8 @@ void run(snakehead* shead, snakebody* sbody, Gamemap* gm, food f, int* score, in
 
 
 int main() {
+	cout << "Initializing..." << endl;
+
 	snakehead a = snakehead();
 	snakebody b = snakebody();
 	Gamemap gm = Gamemap();
@@ -201,6 +203,9 @@ int main() {
 	b.initialize(a);
 	int score = 0;
 	int level = score % 7 + 1;
+	cout << "Press any bottom to start";
+	getchar();
+	system("cls");
 
 	run(&a, &b, &gm, f, &score, &level);
 
