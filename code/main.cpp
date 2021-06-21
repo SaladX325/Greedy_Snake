@@ -166,12 +166,41 @@ int main() {
 	Gamemap gm = Gamemap();
 	food f = food();
 	food_generate(X, Y, &f);
-	a.dwrite(down);
-	a.xwrite(10);
-	a.ywrite(10);
+	int initial_dir;
+	int initial_x = 0;
+	int initial_y = 0;
+	while (initial_x <= 2) {
+		srand((unsigned int)clock());
+		initial_x = rand() % (X - 3);
+	}
+	while (initial_y <= 2) {
+		srand((unsigned int)clock());
+		initial_y = rand() % (Y - 3);
+	}
+	switch (rand() % 4)
+	{
+	case 0:
+		initial_dir = up;
+		break;
+	case 1:
+		initial_dir = down;
+		break;
+	case 2:
+		initial_dir = left;
+		break;
+	case 3:
+		initial_dir = right;
+		break;
+	default:
+		initial_dir = up;
+		break;
+	}
+	a.dwrite(initial_dir);
+	a.xwrite(rand() % (X - 2));
+	a.ywrite(rand() % (X - 2));
 	b.initialize(a);
 	int score = 0;
-	int level = 1;
+	int level = score % 7 + 1;
 
 	run(&a, &b, &gm, f, &score, &level);
 
