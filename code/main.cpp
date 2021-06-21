@@ -18,8 +18,10 @@ using namespace std;
 
 void food_generate(int x, int y, food* f) {
 	srand((unsigned)clock() % 1000);
-	f->x = rand() % x;
-	f->y = rand() % y;
+	do {
+		f->x = rand() % (x - 1);
+		f->y = rand() % (y - 1);
+	} while (f->x == 0 || f->y == 0);
 }
 int input(int time, int dir) {
 	int key = 0;
@@ -43,40 +45,13 @@ int input(int time, int dir) {
 }
 
 void ctrl(snakehead* shead, int level) {
-	int time = 1000 / level;
+	int time = 1200 / level;
 	int key = input(time, shead->dir());
 	if (key) {
 		shead->dwrite(key);
 	}
 }
-
-void print(Gamemap* gm, snakehead shead, snakebody sbody, food f) {
-	system("cls");
-	gm->gamearray = gm->basemap;
-	gm->gamearray[f.x][f.y] = '*';
-	gm->gamearray[shead.xval()][shead.yval()] = '@';
-	vector<pair<int, int>> x;
-	x = sbody.output();
-	for (int i = 0; i < x.size(); i++) {
-		gm->gamearray[x[i].first][x[i].second] = '+';
-	}
-	gm->print();
-}
-
-bool gameover(snakehead shead, snakebody sbody, Gamemap gm) {
-	bool flag = 0;
-	
-
-	return flag;
-}
-
-
-
-void check() {
-
-}
-
-bool isgrow(snakehead shead, food f) {
+pair<int, int> nextstep(snakehead shead) {
 	int mx = 0, my = 0;
 	switch (shead.dir())
 	{
@@ -90,12 +65,12 @@ bool isgrow(snakehead shead, food f) {
 		my = 0;
 		break;
 
-	case left:
+	case right:
 		mx = 0;
 		my = 1;
 		break;
 
-	case right:
+	case left:
 		mx = 0;
 		my = -1;
 		break;
@@ -103,11 +78,51 @@ bool isgrow(snakehead shead, food f) {
 	default:
 		break;
 	}
-	if (f.x == shead.xval() + mx && f.y == shead.yval() + my) {
-		return 1;
-	}
-	else return 0;
+	return { shead.xval() + mx ,shead.yval() + my };
 }
+
+
+
+void check(Gamemap* gm, snakehead shead, snakebody sbody, food f, pair<int, int> step, int* is_grow, int* is_over) {
+
+	gm->gamearray = gm->basemap;
+	int sx = step.first;
+	int sy = step.second;
+	if (sx <= -1 || sx >= X || sy >= Y || sy <= -1) {
+		*is_over = 1;
+	}
+
+	vector<pair<int, int>> x;
+	x = sbody.output();
+	int xb, yb;
+
+	gm->gamearray[f.x][f.y] = '*';
+	gm->gamearray[shead.xval()][shead.yval()] = '@';
+
+	for (int i = 0; i < x.size(); i++) {
+		xb = x[i].first; // x of body
+		yb = x[i].second; // y of body
+
+		if (sx == xb && sy == yb) *is_over = 1;
+		gm->gamearray[xb][yb] = '+';
+	}
+	if (sx == f.x && sy == f.y) *is_grow = 1;
+}
+
+void gameover(int score) {
+	system("cls");
+	cout << "Game Over!" << endl;
+	cout << "The score is: " << score << endl;
+	cout << "Good Luck next time" << endl;
+	cout << "Press SPACE to exit" << endl;
+	int key = 0;
+	while (key != 32) {
+		key = _getch();
+	}
+	
+}
+
+
 
 void move(snakehead* shead, snakebody* sbody) {
 	shead->move();
@@ -121,18 +136,24 @@ void grow_and_move(snakehead* shead, snakebody* sbody) {
 	//sbody->move(*shead);
 }
 
-void run(snakehead* shead, snakebody* sbody, Gamemap* gm, food f) {
+void run(snakehead* shead, snakebody* sbody, Gamemap* gm, food f, int* score, int* level) {
 	while (1) {
-		ctrl(shead, 1);
-		//check();
-		int is_grow = isgrow(*shead, f);
+		*level = *score / 7 + 1;
+		ctrl(shead, *level);
+		int is_grow = 0;
+		int is_over = 0;
+		pair<int, int> step = nextstep(*shead);
+		check(gm, *shead, *sbody, f, step, &is_grow, &is_over);
+		system("cls");
+		gm->print();
+		cout << "Score: " << *score << endl;
+		if (is_over) { gameover(*score); break; }
 		if (is_grow) {
 			grow_and_move(shead, sbody);
 			food_generate(X, Y, &f);
+			*score = *score + 1;
 		}
 		else move(shead, sbody);
-		
-		print(gm, *shead, *sbody, f);
 
 	}
 }
@@ -145,16 +166,15 @@ int main() {
 	Gamemap gm = Gamemap();
 	food f = food();
 	food_generate(X, Y, &f);
-	//f.generate(X,Y, clock() % 1000);
-	a.dwrite(up);
-	a.xwrite(9);
-	a.ywrite(18);
+	a.dwrite(down);
+	a.xwrite(10);
+	a.ywrite(10);
 	b.initialize(a);
+	int score = 0;
+	int level = 1;
 
-	run(&a, &b, &gm, f);
-	//while (1) {
+	run(&a, &b, &gm, f, &score, &level);
 
-	//}
 	return 0;
 
 
