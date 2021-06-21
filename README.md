@@ -1,7 +1,9 @@
 # Greedy_Snake
 This is the Repo of project Greedy_Snake
 
+## Introduction
 This project starts at 10-Jun-21. This is C++ learning project. Greedy Snake is a classic game. In this project, this game is divided into four main parts and nine functions. 
+
 ## Class
 These four classes are listed below:
 1. Snake Head
@@ -28,5 +30,25 @@ In total, there are nine functions. There is three major parts:
 2. Control 
 3. Check
 4. Present
+
+In the moving part, the objective is snake including snake head and body. There are two cases: moving and grow_and_move. Moving case indicated head moves towards _head.dir_ which is a variable (direction) in head class and body follows head. The grow_and_move case is triggered by eating a food. In this case, head moves and the gap between head and body is a new node of body. 
+
+The control part is write the direction of the snake by the key board input. This part is relatively easy. 
+
+The Check part is most complex one. The next step of snake when the input is wrote is essential to next game loop. Thus, there is a function _nextstep_ to calculated the x and y (pair<int, int>) for head after this input. Then, whether game is over and whether snake grows this loop is judged by this x, y combination. The game over criteria is head could not touch the wall or the body. In this case, to saving time, the is_over flag is checked when the map is combined. In combination process, the body of snake is traversed so that the flag could be checked with the help of next step.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
