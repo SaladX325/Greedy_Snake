@@ -3,7 +3,12 @@ This is the Repo of project Greedy_Snake
 
 ## Introduction
 This project starts at 10-Jun-21. This is C++ learning project. Greedy Snake is a classic game. In this project, this game is divided into four main parts and nine functions. 
+The following figure is the flow chart for this project. 
+
 ![Greedy_snake](https://user-images.githubusercontent.com/53904505/122853953-ed577e80-d30a-11eb-9794-6b82f0f27ac1.png)
+
+In following part, the design of this project would be introduced. 
+
 
 ## Class
 These four classes are listed below:
@@ -38,7 +43,7 @@ The control part is write the direction of the snake by the key board input. The
 
 The Check part is most complex one. The next step of snake when the input is wrote is essential to next game loop. Thus, there is a function _nextstep_ to calculated the x and y (pair<int, int>) for head after this input. Then, whether game is over and whether snake grows this loop is judged by this x, y combination. The game over criteria is head could not touch the wall or the body. In this case, to saving time, the is_over flag is checked when the map is combined. In combination process, the body of snake is traversed so that the flag could be checked with the help of next step.
 
-The last part is presenting part. The content is the combined game map from last section. 
+The last part is presenting part. The presented content in this section is the combined game map from last section. Then, next loop starts.
 
 
 
