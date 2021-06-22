@@ -3,23 +3,8 @@ This is the Repo of project Greedy_Snake
 
 ## Introduction
 This project starts at 10-Jun-21. This is C++ learning project. Greedy Snake is a classic game. In this project, this game is divided into four main parts and nine functions. 
-``` flow
-st=>start : Initilization
-cond1=>condition: Wait for input
-cond2=>condition: Check
-cond3=>condition: Grow or not
-op1=>operation: Grow and move
-op2=>operation: Move
-op3=>operation: Print
-ed=>end: Game Over
-st->cond1
-cond1(no input)->cond1
-cond1(time up/input)->cond2
-cond2(game over)->e
-cond2(not over)->cond3
-cond3(yes)->op1->op3->cond1
-cond3(no)->op2->op3
-```
+![Greedy_snake](https://user-images.githubusercontent.com/53904505/122853953-ed577e80-d30a-11eb-9794-6b82f0f27ac1.png)
+
 ## Class
 These four classes are listed below:
 1. Snake Head
